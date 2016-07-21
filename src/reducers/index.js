@@ -2,23 +2,17 @@
 import { combineReducers } from 'redux';
 import objectAssign from 'object-assign';
 
-import { states } from '../constants';
+import { ATMstates, cardStates } from '../constants';
 import * as types from '../actions/actionTypes';
 
 function ui(state = {}, action) {
   switch (action.type) {
 
-    case types.CANCEL:
+    case types.ABORT:
       return objectAssign({}, state, {
         text: 'Please take your card.',
         slotText: 'Click to take your card.',
         input: ''
-      });
-
-    case types.CARD_RETRIEVED:
-      return objectAssign({}, state, {
-        text: 'Please insert your card',
-        slotText: 'Insert card'
       });
 
     case types.LOADING:
@@ -61,24 +55,23 @@ function ui(state = {}, action) {
         input: action.value
       });
 
-
-    case types.SHOW_PREPARATION_SCREEN:
+    case types.WITHDRAW:
       return objectAssign({}, state, {
-        amountWithdrawn: action.amount,
-        text: 'Hold on, moneyz coming your way'
-      });
-
-    case types.TAKE_CARD_AND_MONEY:
-      return objectAssign({}, state, {
-        text: 'Please take your card and money.',
-        slotText: 'Click to take your card.',
+        text: 'Hold on, moneyz coming your way',
         input: ''
       });
 
-
-    case types.TAKE_MONEY:
+    case types.RETURN_CARD:
       return objectAssign({}, state, {
+        text: 'Take your card and money.',
+        slotText: 'Click to take your card.'
+      });
 
+    case types.RESET_STATE:
+      return objectAssign({}, state, {
+        text: 'Please insert your card',
+        slotText: 'Insert card',
+        input: ''
       });
 
     default:
@@ -86,22 +79,28 @@ function ui(state = {}, action) {
   }
 }
 
-function transactionState (state = {}, action) {
+function transaction(state = {}, action) {
   switch (action.type) {
 
-    case types.CANCEL:
+    case types.ABORT:
       return objectAssign({}, state, {
         isAborting: true,
-        state: states.initial
+        state: ATMstates.initial  // ?
       });
 
-    case types.CARD_RETRIEVED:
+    case types.TAKE_CARD:
+      return objectAssign({}, state, {
+        cardState: cardStates.in_wallet
+      });
+
+    case types.RESET_STATE:
       return objectAssign({}, state, {
         isAborting: false,
         isWithdrawing: false,
         isLoading: false,
-        state: states.initial,
-        cardIn: false
+        state: ATMstates.initial,
+        cardState: cardStates.in_wallet,
+        moneyOut: false
       });
 
     case types.LOADING:
@@ -112,26 +111,37 @@ function transactionState (state = {}, action) {
     case types.SHOW_PIN_ENTRY:
       return objectAssign({}, state, {
         isLoading: false,
-        state: states.pin_entry,
-        cardIn: true
+        state: ATMstates.pin_entry,
+        cardState: cardStates.in
       });
 
     case types.PIN_SUCCESS:
       return objectAssign({}, state, {
-        state: states.select_amount
+        state: ATMstates.select_amount
       });
 
-    case types.TAKE_CARD_AND_MONEY:
+    case types.WITHDRAW:
       return objectAssign({}, state, {
         isWithdrawing: true,
-        state: states.taking_money
+        state: ATMstates.withdrawing,
+        amountWithdrawn: action.amount
       });
 
+    case types.SHOW_MONEY:
+      return objectAssign({}, state, {
+        moneyOut: true
+      });
 
     case types.TAKE_MONEY:
       return objectAssign({}, state, {
-        state: states.initial
+        moneyOut: false
       });
+
+    case types.RETURN_CARD:
+      return objectAssign({}, state, {
+        cardState: cardStates.out
+      });
+
 
     default:
       return state
@@ -141,5 +151,5 @@ function transactionState (state = {}, action) {
 
 export default combineReducers({
   ui,
-  transactionState
+  transaction
 });

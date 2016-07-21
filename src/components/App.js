@@ -6,7 +6,7 @@ import Screen from './Screen';
 import Keypad from './Keypad';
 import CardSlot from './CardSlot';
 
-import CancelButton from './CancelButton';
+import AbortButton from './AbortButton';
 import OKButton from './OKButton';
 import ResetButton from './ResetButton';
 import BackButton from './BackButton';
@@ -14,7 +14,7 @@ import BackButton from './BackButton';
 import Wallet from './Wallet';
 import Money from './Money';
 
-import { states } from '../constants';
+import { ATMstates, cardStates } from '../constants';
 
 
 class App extends Component {
@@ -26,16 +26,19 @@ class App extends Component {
 
   render() {
 
-    let state = this.props.transactionState.state;
+    let state = this.props.transaction.state;
 
-    let userInput = (state == states.pin_entry)
-      ? '*'.repeat(this.props.ui.input.length)
+    let userInput = (state == ATMstates.pin_entry)
+      ? '*'.repeat(this.props.ui.input.length) + ' '
       : this.props.ui.input;
 
     const useCard = () => {
-      if (this.props.transactionState.isAborting || this.props.transactionState.isWithdrawing) {
-        return this.props.actions.takeCard()
-      } else if (state == states.initial) {
+      if (this.props.transaction.isAborting) {
+        return this.props.actions.abortTakeCard()
+      } else if (this.props.transaction.isWithdrawing &&
+        this.props.transaction.cardState == cardStates.out) {
+        return this.props.actions.withdrawTakeCard()
+      } else if (state == ATMstates.initial) {
         return this.props.actions.insertCard()
       }
       else {
@@ -44,54 +47,57 @@ class App extends Component {
     };
 
     const pressConfirm = () => {
-      if (state == states.pin_entry) {
+      if (state == ATMstates.pin_entry) {
         return this.props.actions.confirmPIN()
-      } else if (state == states.select_amount) {
+      } else if (state == ATMstates.select_amount) {
         return this.props.actions.confirmAmount(this.props.ui.input)
       } else {
         return null
       }
     };
 
-    const cancel = () => {
-      if (this.props.transactionState.isAborting) {
+    const abort = () => {
+      if (this.props.transaction.isAborting) {
         return null;
-      } else if (state == states.initial) {
+      } else if (state == ATMstates.initial) {
         return null;
       } else {
-        return this.props.actions.cancel()
+        return this.props.actions.abort()
       }
     };
 
-    let cash = (state == states.taking_money)
-      ? this.props.ui.amountWithdrawn.concat(' €')
+    let cash = (this.props.transaction.moneyOut)
+      ? this.props.transaction.amountWithdrawn.concat(' €')
       : '';
 
     return (
       <div className="container">
         <div className="screen-container">
-          <LeftSideButtons selectAmount={state == states.select_amount
+          <LeftSideButtons selectAmount={state == ATMstates.select_amount
                              ? this.props.actions.selectAmount
                              : null}/>
           <Screen text={this.props.ui.text}
                   input={userInput}
-                  showChoices={state == states.select_amount} />
-          <RightSideButtons selectAmount={state == states.select_amount
+                  showChoices={state == ATMstates.select_amount} />
+          <RightSideButtons selectAmount={state == ATMstates.select_amount
                                             ? this.props.actions.selectAmount
                                             : null}/>
         </div>
         <div className="keys-container">
           <Keypad state={state}
                   onKeypress={this.props.actions.onKeypress} />
+          <div className="action-keys">
+            <AbortButton abort={abort}/>
+            <OKButton pressConfirm={pressConfirm} />
+            <ResetButton resetInput={this.props.actions.resetInput}/>
+            <BackButton/>
+          </div>
+        </div>
+        <div className="slots-container">
+          <Money    takeMoney={this.props.actions.takeMoney} cash={cash}/>
           <CardSlot useCard={useCard}
                     slotText={this.props.ui.slotText} />
-          <CancelButton cancel={cancel}/>
-          <OKButton pressConfirm={pressConfirm} />
-          <ResetButton resetInput={this.props.actions.resetInput}/>
-          <BackButton/>
         </div>
-        <Money takeMoney={this.props.actions.takeMoney} cash={cash}/>
-        <Wallet/>
       </div>
     )
   }

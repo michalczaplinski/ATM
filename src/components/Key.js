@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 
-import { states } from '../constants';
+import { ATMstates } from '../constants';
 
 const Key = ({value, onKeypress, state}) => {
 
   const sendKey = () => {
-    if (state == states.pin_entry || state == states.select_amount) {
+    if (state == ATMstates.pin_entry || state == ATMstates.select_amount) {
       return onKeypress(value)
     } else if (value == '') {
       return null

@@ -3,12 +3,50 @@
 }
 
 .screen {
-  width: 400px;
-  height: 400px;
+  width: 260px;
+  height: 300px;
   border-top: 15px ridge lightgrey;
   border-bottom: 15px groove lightgrey;
   border-left: 60px ridge lightgrey;
   border-right: 60px groove lightgrey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-text {
+  margin-top: 40px;
+  height: 15px;
+}
+
+.input {
+  margin-top: 10px;
+  height: 15px;
+}
+
+.choices-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  align-self: stretch;
+  justify-content: space-between;
+}
+
+.left-choices {
+  align-self: flex-start;
+  margin-left: 5px;
+}
+
+.right-choices {
+  align-self: flex-end;
+  margin-right: 5px;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.choice {
+  margin-top: 30px;
 }
 
 .keypad-row {
@@ -16,9 +54,13 @@
   flex-direction: row;
 }
 
-.container {
+.container, .action-keys {
   display: flex;
   flex-direction: column;
+}
+
+.action-keys {
+  margin-left: 24px;
 }
 
 .screen-container {
@@ -26,30 +68,66 @@
   flex-direction: row;
 }
 
-.keys-container {
+.keys-container, .slots-container {
   display: flex;
   flex-direction: row;
+  margin-left: 95px;
+  margin-top: 10px;
 }
 
 .cardslot, .money-button {
-  height: 30px;
-  width: 120px;
+  height: 20px;
+  width: 90px;
   border: 1px solid black;
   cursor: pointer;
+  margin-right: 5px;
 }
 
-.cancel-button, .ok-button, .reset-button, .back-button  {
+.money-button {
+  width: 200px;
+}
+
+.abort-button, .ok-button, .reset-button, .back-button  {
   width: 50px;
   height: 20px;
   border: 1px solid black;
   cursor: pointer;
 }
 
-.leftside-button, .rightside-button, .keypad-button {
+.side-button {
   width: 40px;
   height: 20px;
   border: 1px solid black;
   cursor: pointer;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.side-button-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: 50px;
+}
+
+.keypad-button {
+  width: 40px;
+  height: 20px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.ok-button {
+  background-color: #9ddba1;
+}
+
+.reset-button {
+  background-color: #f9cd0b;
+}
+
+.abort-button {
+  background-color: #eb6976;
 }
 
 .blink {

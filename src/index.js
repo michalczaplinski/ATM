@@ -1,5 +1,3 @@
-// Set up your application entry point here...
-
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider, connect } from 'react-redux';
@@ -13,18 +11,19 @@ import App from './components/App';
 import styles from './style.css'
 
 const store = configureStore({
-  transactionState: {
-    state: 'initial',   // states: 'initial', 'pin_entry', 'select_amount', 'taking_money',
+  transaction: {
+    state: 'initial',   // states: 'initial', 'pin_entry', 'select_amount', 'withdrawing'
     isWithdrawing: false,
     isAborting: false,
     isLoading: false,
-    cardIn: false
+    cardState: 'in_wallet',  // possible states: 'in', 'out', 'in_wallet'
+    moneyOut: false,
+    amountWithdrawn: ''
   },
   ui: {
     text: 'Please insert your card',
     input: '',
-    slotText: 'Insert card',
-    amountWithdrawn: ''
+    slotText: 'Insert card'
   }
 });
 

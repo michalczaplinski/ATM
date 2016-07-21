@@ -7,11 +7,16 @@ export const RESET_INPUT = 'RESET_INPUT';
 export const PIN_SUCCESS = 'PIN_SUCCESS';
 export const PIN_FAILURE = 'PIN_FAILURE';
 
-export const CANCEL = 'CANCEL';
-export const CARD_RETRIEVED = 'CARD_RETRIEVED';
+export const ABORT = 'ABORT';
+export const TAKE_CARD = 'TAKE_CARD';
+
+export const RESET_STATE = 'RESET_STATE';
 
 export const GO_BACK = 'GO_BACK';
 export const SELECT_AMOUNT = 'SELECT_AMOUNT';
-export const SHOW_PREPARATION_SCREEN = 'SHOW_PREPARATION_SCREEN';
-export const TAKE_CARD_AND_MONEY = 'TAKE_CARD_AND_MONEY';
+
+export const SHOW_MONEY = 'SHOW_MONEY';
+export const RETURN_CARD = 'RETURN_CARD';
+
 export const TAKE_MONEY = 'TAKE_MONEY';
+export const WITHDRAW = 'WITHDRAW';

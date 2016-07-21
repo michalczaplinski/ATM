@@ -11,7 +11,7 @@ const SideButton = ({value, selectAmount}) => {
   };
 
   return (
-    <div className="rightside-button" onClick={handleClick}>
+    <div className="side-button" onClick={handleClick}>
     </div>
   )
 };

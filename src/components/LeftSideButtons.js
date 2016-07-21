@@ -4,7 +4,7 @@ import SideButton from './SideButton';
 
 const LeftSideButtons = ({selectAmount}) => {
   return (
-    <div>
+    <div className="side-button-group">
       <SideButton value="10" selectAmount={selectAmount}/>
       <SideButton value="20" selectAmount={selectAmount}/>
       <SideButton value="50" selectAmount={selectAmount}/>
