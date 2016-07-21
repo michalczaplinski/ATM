@@ -1,0 +1,46 @@
+* {
+  font-family: monospace;
+}
+
+.screen {
+  width: 400px;
+  height: 400px;
+  border-top: 15px ridge lightgrey;
+  border-bottom: 15px groove lightgrey;
+  border-left: 60px ridge lightgrey;
+  border-right: 60px groove lightgrey;
+}
+
+.keypad-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.screen-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.keys-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.cardslot {
+  height: 10px;
+  width: 70px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.leftside-button, .rightside-button, .keypad-button {
+  width: 40px;
+  height: 20px;
+  border: 1px solid black;
+  cursor: pointer;
+}
