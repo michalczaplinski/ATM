@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
-const CancelButton = () => {
+const CancelButton = ({cancel}) => {
   return (
-    <div>
-      CANCEL
+    <div className="cancel-button" onClick={cancel}>
+      ABORT
     </div>
   )
 };

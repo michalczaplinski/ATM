@@ -1,17 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
-const OKButton = ({state, OKPress}) => {
-
-  const buttonPress = () => {
-    if (state == 'pin_entry') {
-      return OKPress()
-    } else {
-      return null
-    }
-  };
+const OKButton = ({pressConfirm}) => {
 
   return (
-    <div onClick={buttonPress}>
+    <div className="ok-button" onClick={pressConfirm}>
       OK
     </div>
   )

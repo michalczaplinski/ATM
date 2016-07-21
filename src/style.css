@@ -31,9 +31,16 @@
   flex-direction: row;
 }
 
-.cardslot {
-  height: 10px;
-  width: 70px;
+.cardslot, .money-button {
+  height: 30px;
+  width: 120px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.cancel-button, .ok-button, .reset-button, .back-button  {
+  width: 50px;
+  height: 20px;
   border: 1px solid black;
   cursor: pointer;
 }
@@ -43,4 +50,12 @@
   height: 20px;
   border: 1px solid black;
   cursor: pointer;
+}
+
+.blink {
+  animation: blink 1.5s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  to { visibility: hidden; }
 }

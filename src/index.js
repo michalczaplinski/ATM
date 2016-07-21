@@ -14,16 +14,17 @@ import styles from './style.css'
 
 const store = configureStore({
   transactionState: {
-    state: 'initial',   // states: 'initial', 'pin_entry', 'select_amount', 'take_money', 'success'
+    state: 'initial',   // states: 'initial', 'pin_entry', 'select_amount', 'taking_money',
     isWithdrawing: false,
-    isAborted: false,
-    isLoading: false
+    isAborting: false,
+    isLoading: false,
+    cardIn: false
   },
   ui: {
     text: 'Please insert your card',
-    showAmounts: false,
     input: '',
-    slotText: 'Press to insert card'
+    slotText: 'Insert card',
+    amountWithdrawn: ''
   }
 });
 

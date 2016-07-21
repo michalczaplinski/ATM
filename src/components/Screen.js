@@ -1,19 +1,23 @@
 import React, { Component, PropTypes } from 'react';
 
-const Screen = ({text, input, state}) => {
+const Screen = ({text, input, showChoices}) => {
 
-  const userInput = () => {
-    if (state == 'pin_entry') {
-      return '*'.repeat(input.length);
-    } else {
-      return input
-    }
-  };
+  let cashChoices = showChoices
+    ? <div>
+        <div>10 €</div>
+        <div>20 €</div>
+        <div>50 €</div>
+        <div>100 €</div>
+        <div>200 €</div>
+        <div>gazyllion €</div>
+      </div>
+    : '';
 
   return (
     <div className="screen">
       <div>{text}</div>
-      <div>{userInput()}</div>
+      <div>{input}</div>
+      {cashChoices}
     </div>
   )
 };

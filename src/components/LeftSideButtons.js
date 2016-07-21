@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 
-const LeftSideButtons = () => {
+import SideButton from './SideButton';
+
+const LeftSideButtons = ({selectAmount}) => {
   return (
     <div>
-      <div className="leftside-button"></div>
-      <div className="leftside-button"></div>
-      <div className="leftside-button"></div>
+      <SideButton value="10" selectAmount={selectAmount}/>
+      <SideButton value="20" selectAmount={selectAmount}/>
+      <SideButton value="50" selectAmount={selectAmount}/>
     </div>
   )
 

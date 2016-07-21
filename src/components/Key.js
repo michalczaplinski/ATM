@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 
+import { states } from '../constants';
+
 const Key = ({value, onKeypress, state}) => {
 
   const sendKey = () => {
-    if (state == 'pin_entry' || state == 'withdraw') {
+    if (state == states.pin_entry || state == states.select_amount) {
       return onKeypress(value)
     } else if (value == '') {
       return null
