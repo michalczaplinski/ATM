@@ -5,6 +5,8 @@ import { correctPIN, cardStates, ATMstates } from '../constants';
 // the variable which stores the reference to the setTimoeut function
 var reset;
 
+export function resetInput() { return { type: types.RESET_INPUT } }
+
 // invoked upon aborting another action.
 export function abort() {
   return (dispatch, getState) => {
@@ -25,7 +27,6 @@ export function insertCard() {
     }, 2000);
   }
 }
-
 
 // invoked when ATM picking up the card from ATM after aborting
 export function abortTakeCard() {
@@ -78,7 +79,7 @@ export function confirmAmount(value) {
     // if the amount is not a multiple of 10, return nothing
     if (value % 10 !== 0) {
       dispatch({type: types.AMOUNT_NOT_DIVISIBLE_BY_10});
-      dispatch({ type: types.RESET_INPUT });
+      dispatch(resetInput());
       return
     }
 
