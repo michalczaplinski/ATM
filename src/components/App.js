@@ -11,7 +11,6 @@ import OKButton from './OKButton';
 import ResetButton from './ResetButton';
 import BackButton from './BackButton';
 
-import Wallet from './Wallet';
 import Money from './Money';
 
 import { ATMstates, cardStates } from '../constants';
@@ -28,10 +27,13 @@ class App extends Component {
 
     let state = this.props.transaction.state;
 
+    // Filter user's input before showing it on the screen.
+    // When entering the PIN, we substitute each charachter with '*'.
     let userInput = (state == ATMstates.pin_entry)
       ? '*'.repeat(this.props.ui.input.length)
       : this.props.ui.input;
 
+    // Return different actions depending on the current ATM state.
     const useCard = () => {
       if (this.props.transaction.isAborting) {
         return this.props.actions.abortTakeCard()
@@ -46,6 +48,8 @@ class App extends Component {
       }
     };
 
+    // Pressing the "OK" button either confirms the PIN or the amount withdrawn
+    // depending on the current state of the ATM
     const pressConfirm = () => {
       if (state == ATMstates.pin_entry) {
         return this.props.actions.confirmPIN()
@@ -56,6 +60,8 @@ class App extends Component {
       }
     };
 
+    // pressing abort must not result in any action if we are already aborting or if
+    // we haven't started using the ATM yet.
     const abort = () => {
       if (this.props.transaction.isAborting) {
         return null;

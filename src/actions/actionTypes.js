@@ -1,3 +1,6 @@
+// We store all action types as constants so that we can take advantage of IDE's
+// intelligence in case we misspell the name, etc.
+
 export const LOADING = 'LOADING';
 export const SHOW_PIN_ENTRY = 'SHOW_PIN_ENTRY';
 export const CLEAR_CARD_SLOT = 'CLEAR_CARD_SLOT';
@@ -12,6 +15,7 @@ export const SHOW_ABORT_SCREEN = 'SHOW_ABORT_SCREEN';
 export const TAKE_CARD = 'TAKE_CARD';
 
 export const RESET_STATE = 'RESET_STATE';
+export const AMOUNT_NOT_DIVISIBLE_BY_10 = 'AMOUNT_NOT_DIVSIBLE_BY_10';
 
 export const SELECT_AMOUNT = 'SELECT_AMOUNT';
 export const SHOW_MONEY = 'SHOW_MONEY';

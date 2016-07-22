@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 const Screen = ({text, input, showChoices}) => {
 
+  // only show the 6 predefined choices if in the 'select_amount' state.
   let cashChoices = showChoices
     ? <div className="choices-container">
         <div className="left-choices">

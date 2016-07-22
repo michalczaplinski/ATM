@@ -46,6 +46,11 @@ function ui(state = {}, action) {
         input: ''
       });
 
+    case types.AMOUNT_NOT_DIVISIBLE_BY_10:
+      return objectAssign({}, state, {
+        text: 'Incorrect value. Try again.'
+      });
+
     case types.PIN_SUCCESS:
       return objectAssign({}, state, {
         text: 'Select amount to withdraw:'
