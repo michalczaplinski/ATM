@@ -8,15 +8,17 @@ export const PIN_SUCCESS = 'PIN_SUCCESS';
 export const PIN_FAILURE = 'PIN_FAILURE';
 
 export const ABORT = 'ABORT';
+export const SHOW_ABORT_SCREEN = 'SHOW_ABORT_SCREEN';
 export const TAKE_CARD = 'TAKE_CARD';
 
 export const RESET_STATE = 'RESET_STATE';
 
-export const GO_BACK = 'GO_BACK';
 export const SELECT_AMOUNT = 'SELECT_AMOUNT';
-
 export const SHOW_MONEY = 'SHOW_MONEY';
-export const RETURN_CARD = 'RETURN_CARD';
 
+export const RETURN_CARD = 'RETURN_CARD';
 export const TAKE_MONEY = 'TAKE_MONEY';
+
 export const WITHDRAW = 'WITHDRAW';
+
+export const BACK_TO_PIN = 'BACK_TO_PIN';

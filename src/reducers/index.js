@@ -11,7 +11,13 @@ function ui(state = {}, action) {
     case types.ABORT:
       return objectAssign({}, state, {
         text: 'Please take your card.',
-        slotText: 'Click to take your card.',
+        slotText: 'Take card.',
+        input: ''
+      });
+
+    case types.SHOW_ABORT_SCREEN:
+      return objectAssign({}, state, {
+        text: 'Aborting transaction...',
         input: ''
       });
 
@@ -57,14 +63,14 @@ function ui(state = {}, action) {
 
     case types.WITHDRAW:
       return objectAssign({}, state, {
-        text: 'Hold on, moneyz coming your way',
+        text: `Withdrawing ${action.amount} €...`,
         input: ''
       });
 
     case types.RETURN_CARD:
       return objectAssign({}, state, {
         text: 'Take your card and money.',
-        slotText: 'Click to take your card.'
+        slotText: 'Take card.'
       });
 
     case types.RESET_STATE:
@@ -72,6 +78,13 @@ function ui(state = {}, action) {
         text: 'Please insert your card',
         slotText: 'Insert card',
         input: ''
+      });
+
+    case types.BACK_TO_PIN:
+      return objectAssign({}, state, {
+        text: 'Please enter your PIN',
+        input: '',
+        slotText: ''
       });
 
     default:
@@ -85,7 +98,7 @@ function transaction(state = {}, action) {
     case types.ABORT:
       return objectAssign({}, state, {
         isAborting: true,
-        state: ATMstates.initial  // ?
+        state: ATMstates.initial
       });
 
     case types.TAKE_CARD:
@@ -96,7 +109,6 @@ function transaction(state = {}, action) {
     case types.RESET_STATE:
       return objectAssign({}, state, {
         isAborting: false,
-        isWithdrawing: false,
         isLoading: false,
         state: ATMstates.initial,
         cardState: cardStates.in_wallet,
@@ -122,7 +134,6 @@ function transaction(state = {}, action) {
 
     case types.WITHDRAW:
       return objectAssign({}, state, {
-        isWithdrawing: true,
         state: ATMstates.withdrawing,
         amountWithdrawn: action.amount
       });
@@ -142,6 +153,13 @@ function transaction(state = {}, action) {
         cardState: cardStates.out
       });
 
+    case types.BACK_TO_PIN:
+      return objectAssign({}, state, {
+        state: ATMstates.pin_entry,
+        isAborting: false,
+        isLoading: false,
+        moneyOut: false
+      });
 
     default:
       return state

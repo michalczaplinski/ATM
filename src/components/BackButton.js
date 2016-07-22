@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
-const BackButton = () => {
+const BackButton = ({goBack}) => {
   return (
-    <div className="back-button">
+    <div className="back-button" onClick={goBack}>
       BACK
     </div>
   )

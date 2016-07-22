@@ -29,13 +29,13 @@ class App extends Component {
     let state = this.props.transaction.state;
 
     let userInput = (state == ATMstates.pin_entry)
-      ? '*'.repeat(this.props.ui.input.length) + ' '
+      ? '*'.repeat(this.props.ui.input.length)
       : this.props.ui.input;
 
     const useCard = () => {
       if (this.props.transaction.isAborting) {
         return this.props.actions.abortTakeCard()
-      } else if (this.props.transaction.isWithdrawing &&
+      } else if (state == ATMstates.withdrawing &&
         this.props.transaction.cardState == cardStates.out) {
         return this.props.actions.withdrawTakeCard()
       } else if (state == ATMstates.initial) {
@@ -87,10 +87,10 @@ class App extends Component {
           <Keypad state={state}
                   onKeypress={this.props.actions.onKeypress} />
           <div className="action-keys">
-            <AbortButton abort={abort}/>
             <OKButton pressConfirm={pressConfirm} />
+            <BackButton goBack={this.props.actions.goBack}/>
             <ResetButton resetInput={this.props.actions.resetInput}/>
-            <BackButton/>
+            <AbortButton abort={abort}/>
           </div>
         </div>
         <div className="slots-container">

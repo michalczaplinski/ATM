@@ -13,7 +13,6 @@ import styles from './style.css'
 const store = configureStore({
   transaction: {
     state: 'initial',   // states: 'initial', 'pin_entry', 'select_amount', 'withdrawing'
-    isWithdrawing: false,
     isAborting: false,
     isLoading: false,
     cardState: 'in_wallet',  // possible states: 'in', 'out', 'in_wallet'

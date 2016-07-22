@@ -6,8 +6,7 @@ export const ATMstates = {
   initial: 'initial',
   pin_entry: 'pin_entry',
   select_amount: 'select_amount',
-  withdrawing: 'withdrawing',
-  success: 'success'
+  withdrawing: 'withdrawing'
 };
 
 export const cardStates = {

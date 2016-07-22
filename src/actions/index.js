@@ -1,8 +1,15 @@
 import * as types from './actionTypes';
 
-import { correctPIN, cardStates } from '../constants';
+import { correctPIN, cardStates, ATMstates } from '../constants';
 
-export function abort() { return { type: types.ABORT } }
+export function abort() {
+  return (dispatch, getState) => {
+    dispatch({ type: types.SHOW_ABORT_SCREEN });
+    setTimeout(() => {
+      dispatch({ type: types.ABORT });
+    }, 2000)
+  }
+}
 
 // the variable which stores the reference to the setTimoeut function
 var reset;
@@ -76,7 +83,7 @@ export function confirmAmount(value) {
     setTimeout(() => {
       dispatch(showMoney());
       dispatch(returnCard());
-    }, 2000);
+    }, 3500);
 
     reset = setTimeout(() => {
       dispatch(resetState());
@@ -92,6 +99,17 @@ export function takeMoney() {
     dispatch({ type: types.TAKE_MONEY });
     if (getState().transaction.cardState == cardStates.in_wallet) {
       dispatch(resetState());
+    }
+  }
+}
+
+export function goBack() {
+  return (dispatch, getState) => {
+    const state = getState().transaction.state;
+    if (state == ATMstates.pin_entry) {
+      dispatch(abort());
+    } else if (state == ATMstates.select_amount) {
+      dispatch({ type: types.BACK_TO_PIN })
     }
   }
 }
