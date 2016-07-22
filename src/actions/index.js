@@ -77,7 +77,7 @@ export function confirmAmount(value) {
   return (dispatch, getState) => {
 
     // if the amount is not a multiple of 10, return nothing
-    if (value % 10 !== 0) {
+    if (value % 10 !== 0 && value !== 'gazillion') {
       dispatch({type: types.AMOUNT_NOT_DIVISIBLE_BY_10});
       dispatch(resetInput());
       return

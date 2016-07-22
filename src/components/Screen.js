@@ -13,7 +13,7 @@ const Screen = ({text, input, showChoices}) => {
         <div className="right-choices">
           <div className="choice">100 €</div>
           <div className="choice">200 €</div>
-          <div className="choice">gazyllion €</div>
+          <div className="choice">gazillion €</div>
         </div>
       </div>
     : '';
