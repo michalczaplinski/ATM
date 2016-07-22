@@ -6,7 +6,7 @@ npm install
 npm run start
 ```
 
-The implementation uses react and redux. I think that the explanation of the redux architecture would be beyond the scope of this `README`, so the comments in code would assume some familiarity with those frameworks.
+The implementation uses react and redux. I think that the explanation of the redux architecture would be beyond the scope of this `README`, so the comments in code assume some familiarity with those frameworks.
 
 Some assumptions and limitations of the implementation:
   - The pin can only be 4 digits long. Any character inputted following the first 4 will be ignored, which I believe is how a real cash machine behaves.

@@ -10,6 +10,7 @@ import App from './components/App';
 // my CSS STYLES
 import styles from './style.css'
 
+// we pass the initial application state to the store
 const store = configureStore({
   transaction: {
     state: 'initial',   // states: 'initial', 'pin_entry', 'select_amount', 'withdrawing'
@@ -30,7 +31,6 @@ const Application = connect(
   (state) =>  state,
   (dispatch) => { return { actions: bindActionCreators(actions, dispatch)} }
 )(App);
-
 
 render(
   <Provider store={store}>
